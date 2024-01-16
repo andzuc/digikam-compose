@@ -1,0 +1,21 @@
+# https://github.com/linuxserver/docker-digikam
+---
+services:
+  digikam:
+    image: lscr.io/linuxserver/digikam:latest
+    container_name: digikam
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Rome
+      - SUBFOLDER=/ #optional
+    volumes:
+      - config:/config
+    ports:
+      - 3000:3000 #optional
+      - 3001:3001 #optional
+    restart: unless-stopped
+volumes:
+  config:
+    external: true
+    name: "${DIGIKAM_CONFIG}"
