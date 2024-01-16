@@ -11,6 +11,7 @@ services:
       - SUBFOLDER=/ #optional
     volumes:
       - config:/config
+      - "${PHOTO_CAMERAS}"
     ports:
       - ${KASMVNC_PORT}:3000
     restart: unless-stopped
