@@ -12,6 +12,7 @@ services:
     volumes:
       - config:/config
       - "${PHOTO_CAMERAS}"
+      - "${PHOTO_WORK}"
     ports:
       - ${KASMVNC_PORT}:3000
     restart: unless-stopped
