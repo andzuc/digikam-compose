@@ -1,6 +1,7 @@
 #!/bin/bash
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "${MYDIR}/.."
+export BASEDIR="${MYDIR}/.."
+cd "${BASSEDIR}"
 
 source .env
 if ! docker volume inspect "${DIGIKAM_CONFIG}" >/dev/null 2>&1 ; then

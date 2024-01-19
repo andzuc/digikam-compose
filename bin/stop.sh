@@ -1,5 +1,6 @@
 #!/bin/bash
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "${MYDIR}/.."
+export BASEDIR="${MYDIR}/.."
+cd "${BASSEDIR}"
 
 docker compose down

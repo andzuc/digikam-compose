@@ -11,6 +11,7 @@ services:
       - SUBFOLDER=/ #optional
     volumes:
       - config:/config
+      - "${BASEDIR}/custom/services:/custom-services.d:ro"
       - "${PHOTO_CAMERAS}"
       - "${PHOTO_WORK}"
       - "${PHOTO_TRASH}"
