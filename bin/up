@@ -1,0 +1,34 @@
+#!/bin/bash
+MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export BASEDIR="${MYDIR}/.."
+cd "${BASSEDIR}"
+
+source .env
+
+DIGIKAM_CONFIG=digikam_config
+if ! docker volume inspect digikam_config >/dev/null 2>&1 ; then
+    echo docker volume create digikam_config
+    docker volume create digikam_config
+fi
+docker volume inspect digikam_config
+
+if ! docker volume inspect photo_cameras >/dev/null 2>&1 ; then
+    echo docker volume create photo_cameras
+    docker volume create --driver local --opt type=none --opt device="${PHOTO_CAMERAS}" --opt o=bind,ro photo_cameras
+fi
+docker volume inspect photo_cameras
+
+if ! docker volume inspect photo_work >/dev/null 2>&1 ; then
+    echo docker volume create photo_work
+    docker volume create --driver local --opt type=none --opt device="${PHOTO_WORK}" --opt o=bind photo_work
+fi
+docker volume inspect photo_work
+
+if ! docker volume inspect photo_trash >/dev/null 2>&1 ; then
+    echo docker volume create photo_trash
+    docker volume create --driver local --opt type=none --opt device="${PHOTO_TRASH}" --opt o=bind photo_trash
+fi
+docker volume inspect photo_trash
+
+docker compose up -d
+echo "Open digiKam URL: http://localhost:${KASMVNC_PORT}"

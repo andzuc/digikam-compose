@@ -10,15 +10,24 @@ services:
       - TZ=Europe/Rome
       - SUBFOLDER=/ #optional
     volumes:
-      - config:/config
       - "${BASEDIR}/custom/services:/custom-services.d:ro"
-      - "${PHOTO_CAMERAS}"
-      - "${PHOTO_WORK}"
-      - "${PHOTO_TRASH}"
+      - config:/config
+      - photo_cameras:/config/Pictures/cameras:ro
+      - photo_work:/config/Pictures/tera
+      - photo_trash:/config/Pictures/.dtrash
     ports:
       - ${KASMVNC_PORT}:3000
     restart: unless-stopped
 volumes:
   config:
     external: true
-    name: "${DIGIKAM_CONFIG}"
+    name: digikam_config
+  photo_cameras:
+    external: true
+    name: photo_cameras
+  photo_work:
+    external: true
+    name: photo_work
+  photo_trash:
+    external: true
+    name: photo_trash
